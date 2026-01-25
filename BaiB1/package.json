@@ -1,0 +1,9 @@
+{
+  "name": "product-management-system",
+  "version": "1.0.0",
+  "description": "Product Management System - 10 JavaScript Tasks",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  }
+}

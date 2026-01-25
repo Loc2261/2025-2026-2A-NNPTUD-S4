@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management System - 10 Tasks</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+<header>
+<h1>📦 Product Management System</h1>
+<p class="subtitle">10 JavaScript Tasks - Results</p>
+</header>
+<main>
+<section class="overview"><h2>📊 Tổng Quan</h2>
+<div class="stats">
+<div class="stat"><strong>6</strong><p>Tổng sản phẩm</p></div>
+<div class="stat"><strong>5</strong><p>Còn hàng</p></div>
+<div class="stat"><strong>3</strong><p>Giá > 30M</p></div>
+<div class="stat"><strong>4</strong><p>Sẵn & Còn hàng</p></div>
+</div></section>
+<section class="task"><h2>✓ Task 1: Product Constructor Function</h2>
+<div class="content"><p><strong>Mục đích:</strong> Tạo constructor khởi tạo objects sản phẩm</p>
+<pre><code>function Product(id, name, price, quantity, category, isAvailable) {
+    this.id = id;
+    this.name = name;
+    this.price = price;
+    this.quantity = quantity;
+    this.category = category;
+    this.isAvailable = isAvailable;
+}</code></pre>
+<p><strong>✓ Kết quả:</strong> Constructor được tạo thành công</p>
+</div></section>
+<section class="task"><h2>✓ Task 2: Khởi Tạo Array Products (6 sản phẩm)</h2>
+<div class="content"><table class="table"><thead><tr>
+<th>ID</th><th>Tên</th><th>Giá</th><th>Số Lượng</th><th>Danh Mục</th><th>Sẵn Có</th>
+</tr></thead><tbody>
+<tr><td>1</td><td>iPhone 15 Pro</td><td>35.000.000 VND</td>
+<td>5</td><td>Electronics</td><td>✓</td></tr>
+<tr><td>2</td><td>Samsung Galaxy S24</td><td>32.000.000 VND</td>
+<td>8</td><td>Electronics</td><td>✓</td></tr>
+<tr><td>3</td><td>MacBook Pro 16</td><td>45.000.000 VND</td>
+<td>2</td><td>Electronics</td><td>✓</td></tr>
+<tr><td>4</td><td>Wireless Earbuds</td><td>5.000.000 VND</td>
+<td>15</td><td>Accessories</td><td>✓</td></tr>
+<tr><td>5</td><td>USB-C Cable</td><td>500.000 VND</td>
+<td>30</td><td>Accessories</td><td>✗</td></tr>
+<tr><td>6</td><td>Phone Stand</td><td>200.000 VND</td>
+<td>0</td><td>Accessories</td><td>✓</td></tr>
+</tbody></table>
+<p><strong>✓ Kết quả:</strong> 6 sản phẩm từ 2 danh mục</p>
+</div></section>
+<section class="task"><h2>✓ Task 3: Array Name & Price</h2>
+<div class="content"><p><strong>Lệnh:</strong> <code>products.map(p => ({name: p.name, price: p.price}))</code></p>
+<pre><code>[
+  {
+    "name": "iPhone 15 Pro",
+    "price": 35000000
+  },
+  {
+    "name": "Samsung Galaxy S24",
+    "price": 32000000
+  },
+  {
+    "name": "MacBook Pro 16",
+    "price": 45000000
+  },
+  {
+    "name": "Wireless Earbuds",
+    "price": 5000000
+  },
+  {
+    "name": "USB-C Cable",
+    "price": 500000
+  },
+  {
+    "name": "Phone Stand",
+    "price": 200000
+  }
+]</code></pre>
+<p><strong>✓ Kết quả:</strong> 6 sản phẩm với name & price</p>
+</div></section>
+<section class="task"><h2>✓ Task 4: Sản Phẩm Còn Hàng (quantity > 0)</h2>
+<div class="content"><p><strong>Lệnh:</strong> <code>products.filter(p => p.quantity > 0)</code></p>
+<ul class="list">
+<li>iPhone 15 Pro - 5 units</li>
+<li>Samsung Galaxy S24 - 8 units</li>
+<li>MacBook Pro 16 - 2 units</li>
+<li>Wireless Earbuds - 15 units</li>
+<li>USB-C Cable - 30 units</li>
+</ul>
+<p><strong>✓ Kết quả:</strong> 5/6 sản phẩm còn hàng</p>
+</div></section>
+<section class="task"><h2>✓ Task 5: Kiểm Tra Giá > 30,000,000</h2>
+<div class="content"><p><strong>Lệnh:</strong> <code>products.some(p => p.price > 30000000)</code></p>
+<div class="result-box success">
+<p>Có sản phẩm giá > 30M: <strong>✓ CÓ</strong></p>
+</div>
+<ul class="list">
+<li>iPhone 15 Pro - 35.000.000 VND</li>
+<li>Samsung Galaxy S24 - 32.000.000 VND</li>
+<li>MacBook Pro 16 - 45.000.000 VND</li>
+</ul>
+<p><strong>✓ Kết quả:</strong> 3 sản phẩm</p>
+</div></section>
+<section class="task"><h2>✓ Task 6: Accessories - Tính Sẵn Có</h2>
+<div class="content"><p><strong>Lệnh:</strong> <code>accessoriesProducts.every(p => p.isAvailable === true)</code></p>
+<div class="result-box danger">
+<p>Tất cả Accessories sẵn có: <strong>✗ KHÔNG</strong></p>
+</div>
+<ul class="list">
+<li>Wireless Earbuds - ✓ Sẵn</li>
+<li>USB-C Cable - ✗ Không</li>
+<li>Phone Stand - ✓ Sẵn</li>
+</ul></div></section>
+<section class="task"><h2>✓ Task 7: Tổng Giá Trị Hàng Tồn Kho</h2>
+<div class="content"><p><strong>Lệnh:</strong> <code>products.reduce((sum, p) => sum + (p.price * p.quantity), 0)</code></p>
+<div class="result-box highlight">
+<h3>611.000.000 VND</h3>
+</div>
+<p><strong>Giá trị theo danh mục:</strong></p>
+<ul class="list">
+<li><strong>Electronics:</strong> 521.000.000 VND</li>
+<li><strong>Accessories:</strong> 90.000.000 VND</li>
+</ul></div></section>
+<section class="task"><h2>✓ Task 8: for...of Loop</h2>
+<div class="content"><p><strong>Lệnh:</strong> <code>for (const product of products) { ... }</code></p>
+<pre><code>iPhone 15 Pro | Electronics | ✓
+Samsung Galaxy S24 | Electronics | ✓
+MacBook Pro 16 | Electronics | ✓
+Wireless Earbuds | Accessories | ✓
+USB-C Cable | Accessories | ✗
+Phone Stand | Accessories | ✓</code></pre>
+<p><strong>✓ Kết quả:</strong> Iterate 6 sản phẩm thành công</p>
+</div></section>
+<section class="task"><h2>✓ Task 9: Dynamic Search & for...in Loop</h2>
+<div class="content"><p><strong>Lệnh tìm kiếm:</strong> <code>products.find(p => p.id === 3)</code></p>
+<p><strong>Sản phẩm tìm thấy: MacBook Pro 16</strong></p>
+<pre><code>id: 3
+name: MacBook Pro 16
+price: 45000000
+quantity: 2
+category: Electronics
+isAvailable: true</code></pre>
+<p><strong>✓ Kết quả:</strong> 6 properties được iterate</p>
+</div></section>
+<section class="task"><h2>✓ Task 10: Sản Phẩm Sẵn Có & Còn Hàng (Chỉ lấy Tên)</h2>
+<div class="content"><p><strong>Điều kiện:</strong> <code>Sẵn có (isAvailable === true)</code> VÀ <code>Còn hàng (quantity > 0)</code></p>
+<div class="logic-explanation">
+  <p>💡 <strong>Tại sao lại là 4/6 sản phẩm?</strong></p>
+  <ul class="list-small">
+    <li><del>USB-C Cable</del> (Không sẵn có)</li>
+    <li><del>Phone Stand</del> (Hết hàng)</li>
+  </ul>
+</div>
+<p><strong>Danh sách tên sản phẩm thỏa mãn:</strong></p>
+<ul class="list">
+<li>iPhone 15 Pro</li>
+<li>Samsung Galaxy S24</li>
+<li>MacBook Pro 16</li>
+<li>Wireless Earbuds</li>
+</ul>
+<p><strong>✓ Kết quả:</strong> 4 sản phẩm thỏa mãn</p>
+</div></section>
+</main>
+<footer>
+<p>🎓 Product Management System - 10 Tasks JavaScript</p>
+<p>© 2026 - All rights reserved</p>
+</footer>
+</div>
+</body>
+</html>
