@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post & Comment Manager</title>
+    <script src="main.js"></script>
+</head>
+<body>
+
+<h2 align="center">POST MANAGEMENT</h2>
+
+<table border="1" width="80%" align="center" cellpadding="8">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Views</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="body_table">
+        <!-- Posts render here -->
+    </tbody>
+</table>
+
+<br>
+
+<fieldset style="width:78%; margin:auto;">
+    <legend><b>Post Form</b></legend>
+
+    <input type="hidden" id="id_txt">
+
+    Title:
+    <input type="text" id="title_txt">
+    &nbsp;&nbsp;
+
+    Views:
+    <input type="number" id="view_txt">
+    &nbsp;&nbsp;
+
+    <input type="submit" value="Save Post" onclick="SavePost()">
+</fieldset>
+
+<hr width="80%">
+
+<h2 align="center">COMMENT MANAGEMENT</h2>
+
+<table border="1" width="80%" align="center" cellpadding="8">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Post ID</th>
+            <th>Content</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="comment_table">
+        <!-- Comments render here -->
+    </tbody>
+</table>
+
+<br>
+
+<fieldset style="width:78%; margin:auto;">
+    <legend><b>Comment Form</b></legend>
+
+    <input type="hidden" id="c_id">
+
+    Post ID:
+    <input type="text" id="c_postId">
+    &nbsp;&nbsp;
+
+    Content:
+    <input type="text" id="c_content" size="40">
+    &nbsp;&nbsp;
+
+    <input type="submit" value="Save Comment" onclick="SaveComment()">
+</fieldset>
+
+<br><br>
+
+</body>
+</html>
