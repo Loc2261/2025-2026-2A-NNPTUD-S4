@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Post & Comment Manager</title>
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
 </head>
 <body>
 
@@ -18,9 +18,7 @@
             <th>Action</th>
         </tr>
     </thead>
-    <tbody id="body_table">
-        <!-- Posts render here -->
-    </tbody>
+    <tbody id="body_table"></tbody>
 </table>
 
 <br>
@@ -32,11 +30,9 @@
 
     Title:
     <input type="text" id="title_txt">
-    &nbsp;&nbsp;
 
     Views:
     <input type="number" id="view_txt">
-    &nbsp;&nbsp;
 
     <input type="submit" value="Save Post" onclick="SavePost()">
 </fieldset>
@@ -54,9 +50,7 @@
             <th>Action</th>
         </tr>
     </thead>
-    <tbody id="comment_table">
-        <!-- Comments render here -->
-    </tbody>
+    <tbody id="comment_table"></tbody>
 </table>
 
 <br>
@@ -68,16 +62,12 @@
 
     Post ID:
     <input type="text" id="c_postId">
-    &nbsp;&nbsp;
 
     Content:
     <input type="text" id="c_content" size="40">
-    &nbsp;&nbsp;
 
     <input type="submit" value="Save Comment" onclick="SaveComment()">
 </fieldset>
-
-<br><br>
 
 </body>
 </html>

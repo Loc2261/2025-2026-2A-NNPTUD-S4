@@ -39,7 +39,8 @@
     {
       "id": "10",
       "title": "ok",
-      "views": "1"
+      "views": "1",
+      "isDeleted": true
     },
     {
       "id": "11",
@@ -70,7 +71,7 @@
       "id": "4",
       "postId": "20",
       "content": "zzzz",
-      "isDeleted": false
+      "isDeleted": true
     }
   ],
   "profile": {

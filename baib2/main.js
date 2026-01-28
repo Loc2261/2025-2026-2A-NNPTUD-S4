@@ -1,58 +1,59 @@
 const POST_API = "http://localhost:3000/posts";
 const COMMENT_API = "http://localhost:3000/comments";
 
-/* ================= POSTS ================= */
+/* =======================
+   POSTS
+======================= */
 
 async function LoadPosts() {
-    let res = await fetch(POST_API);
-    let posts = await res.json();
+    const res = await fetch(POST_API);
+    const posts = await res.json();
 
-    let body = document.getElementById("body_table");
+    const body = document.getElementById("body_table");
     body.innerHTML = "";
 
-    for (const post of posts) {
-        let cls = post.isDeleted ? "deleted" : "";
-        body.innerHTML += `
-            <tr class="${cls}">
-                <td>${post.id}</td>
-                <td>${post.title}</td>
-                <td>${post.views}</td>
-                <td>
-                    <button onclick="EditPost('${post.id}')">Edit</button>
-                    <button onclick="DeletePost('${post.id}')">Delete</button>
-                </td>
-            </tr>
-        `;
-    }
-}
+    posts.forEach(post => {
+        const text = v => post.isDeleted ? `<del style="color:red">${v}</del>` : v;
 
-async function GetNextPostId() {
-    let res = await fetch(POST_API);
-    let posts = await res.json();
-    let maxId = posts.length ? Math.max(...posts.map(p => Number(p.id))) : 0;
-    return String(maxId + 1);
+        body.innerHTML += `
+        <tr>
+            <td>${text(post.id)}</td>
+            <td>${text(post.title)}</td>
+            <td>${text(post.views)}</td>
+            <td>
+                ${post.isDeleted
+                    ? `<button onclick="RestorePost('${post.id}')">Restore</button>`
+                    : `
+                        <button onclick="EditPost('${post.id}')">Edit</button>
+                        <button onclick="DeletePost('${post.id}')">Delete</button>
+                      `
+                }
+            </td>
+        </tr>`;
+    });
 }
 
 async function SavePost() {
-    let id = document.getElementById("id_txt").value;
-    let title = document.getElementById("title_txt").value;
-    let views = document.getElementById("view_txt").value;
+    const id = document.getElementById("id_txt").value;
+    const title = document.getElementById("title_txt").value;
+    const views = document.getElementById("view_txt").value;
+
+    if (!title || !views) {
+        alert("Nhập đủ dữ liệu");
+        return;
+    }
 
     if (id) {
-        // UPDATE
         await fetch(`${POST_API}/${id}`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ title, views })
         });
     } else {
-        // CREATE
-        let newId = await GetNextPostId();
         await fetch(POST_API, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                id: newId,
                 title,
                 views,
                 isDeleted: false
@@ -65,8 +66,8 @@ async function SavePost() {
 }
 
 async function EditPost(id) {
-    let res = await fetch(`${POST_API}/${id}`);
-    let post = await res.json();
+    const res = await fetch(`${POST_API}/${id}`);
+    const post = await res.json();
 
     document.getElementById("id_txt").value = post.id;
     document.getElementById("title_txt").value = post.title;
@@ -74,11 +75,24 @@ async function EditPost(id) {
 }
 
 async function DeletePost(id) {
+    if (!confirm("Xóa mềm post này?")) return;
+
     await fetch(`${POST_API}/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ isDeleted: true })
     });
+
+    LoadPosts();
+}
+
+async function RestorePost(id) {
+    await fetch(`${POST_API}/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ isDeleted: false })
+    });
+
     LoadPosts();
 }
 
@@ -88,42 +102,47 @@ function ClearPostForm() {
     document.getElementById("view_txt").value = "";
 }
 
-/* ================= COMMENTS ================= */
+/* =======================
+   COMMENTS
+======================= */
 
 async function LoadComments() {
-    let res = await fetch(COMMENT_API);
-    let comments = await res.json();
+    const res = await fetch(COMMENT_API);
+    const comments = await res.json();
 
-    let body = document.getElementById("comment_table");
+    const body = document.getElementById("comment_table");
     body.innerHTML = "";
 
-    for (const c of comments) {
-        let cls = c.isDeleted ? "deleted" : "";
-        body.innerHTML += `
-            <tr class="${cls}">
-                <td>${c.id}</td>
-                <td>${c.postId}</td>
-                <td>${c.content}</td>
-                <td>
-                    <button onclick="EditComment('${c.id}')">Edit</button>
-                    <button onclick="DeleteComment('${c.id}')">Delete</button>
-                </td>
-            </tr>
-        `;
-    }
-}
+    comments.forEach(c => {
+        const text = v => c.isDeleted ? `<del style="color:red">${v}</del>` : v;
 
-async function GetNextCommentId() {
-    let res = await fetch(COMMENT_API);
-    let comments = await res.json();
-    let maxId = comments.length ? Math.max(...comments.map(c => Number(c.id))) : 0;
-    return String(maxId + 1);
+        body.innerHTML += `
+        <tr>
+            <td>${text(c.id)}</td>
+            <td>${text(c.postId)}</td>
+            <td>${text(c.content)}</td>
+            <td>
+                ${c.isDeleted
+                    ? `<button onclick="RestoreComment('${c.id}')">Restore</button>`
+                    : `
+                        <button onclick="EditComment('${c.id}')">Edit</button>
+                        <button onclick="DeleteComment('${c.id}')">Delete</button>
+                      `
+                }
+            </td>
+        </tr>`;
+    });
 }
 
 async function SaveComment() {
-    let id = document.getElementById("c_id").value;
-    let postId = document.getElementById("c_postId").value;
-    let content = document.getElementById("c_content").value;
+    const id = document.getElementById("c_id").value;
+    const postId = document.getElementById("c_postId").value;
+    const content = document.getElementById("c_content").value;
+
+    if (!postId || !content) {
+        alert("Nhập đủ dữ liệu");
+        return;
+    }
 
     if (id) {
         await fetch(`${COMMENT_API}/${id}`, {
@@ -132,12 +151,10 @@ async function SaveComment() {
             body: JSON.stringify({ postId, content })
         });
     } else {
-        let newId = await GetNextCommentId();
         await fetch(COMMENT_API, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                id: newId,
                 postId,
                 content,
                 isDeleted: false
@@ -150,8 +167,8 @@ async function SaveComment() {
 }
 
 async function EditComment(id) {
-    let res = await fetch(`${COMMENT_API}/${id}`);
-    let c = await res.json();
+    const res = await fetch(`${COMMENT_API}/${id}`);
+    const c = await res.json();
 
     document.getElementById("c_id").value = c.id;
     document.getElementById("c_postId").value = c.postId;
@@ -159,11 +176,24 @@ async function EditComment(id) {
 }
 
 async function DeleteComment(id) {
+    if (!confirm("Xóa mềm comment này?")) return;
+
     await fetch(`${COMMENT_API}/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ isDeleted: true })
     });
+
+    LoadComments();
+}
+
+async function RestoreComment(id) {
+    await fetch(`${COMMENT_API}/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ isDeleted: false })
+    });
+
     LoadComments();
 }
 
@@ -173,6 +203,9 @@ function ClearCommentForm() {
     document.getElementById("c_content").value = "";
 }
 
-/* INIT */
+/* =======================
+   INIT
+======================= */
+
 LoadPosts();
 LoadComments();
